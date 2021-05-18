@@ -28,7 +28,7 @@ jobs:
     - name: JaCoCo Report
       # You may pin to the exact commit or the version.
       # uses: Madrapps/jacoco-report@67036d804c34935864dfef774aa6c6d3924c021d
-      #uses: Madrapps/jacoco-report@v1.1
+      uses: Madrapps/jacoco-report@v1.1
       with:
         # Path of the generated xml file
         path: build/reports/jacoco/test/jacocoTestReport.xml
