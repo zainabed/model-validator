@@ -32,7 +32,7 @@ class ValidationRulesTest {
     @Test
     void shouldAssertForNullSupplier() {
         assertThrows(IllegalArgumentException.class , () -> {
-            ValidationRules.notNull(null, null);
+            ValidationRules.notNull(null, message);
         });
     }
 
