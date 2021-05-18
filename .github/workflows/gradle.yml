@@ -25,4 +25,18 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    
+    - name: JaCoCo Report
+      # You may pin to the exact commit or the version.
+      # uses: Madrapps/jacoco-report@67036d804c34935864dfef774aa6c6d3924c021d
+      #uses: Madrapps/jacoco-report@v1.1
+      with:
+        # Path of the generated xml file
+        path: build/reports/jacoco/test/jacocoTestReport.xml
+        # Github personal token to add commits to Pull Request
+        token: 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
+        # The minimum code coverage that is required to pass for overall project
+        min-coverage-overall: 80
+        # The minimum code coverage that is required to pass for changed files
+        min-coverage-changed-files:  80
+        # Run the action in debug mode and get debug logs printed in console
+        debug-mode: false
