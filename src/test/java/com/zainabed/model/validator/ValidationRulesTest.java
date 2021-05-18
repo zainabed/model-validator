@@ -31,15 +31,29 @@ class ValidationRulesTest {
 
     @Test
     void shouldAssertForNullSupplier() {
-        assertThrows(IllegalArgumentException.class , () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             ValidationRules.notNull(null, message);
         });
     }
 
     @Test
     void shouldAssertForNullMessage() {
-        assertThrows(IllegalArgumentException.class, () ->{
-           ValidationRules.notNull(nonNullSupplier,null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ValidationRules.notNull(nonNullSupplier, null);
         });
     }
+
+    @Test
+    void shouldValidateBoolean() {
+        Supplier<Boolean> booleanCallable = () -> true;
+        assertNull(ValidationRules.notNull(booleanCallable, message));
+    }
+
+    @Test
+    void shouldValidateInteger() {
+        Supplier<Integer> integerCallable = () -> 1;
+        assertNull(ValidationRules.notNull(integerCallable, message));
+    }
+
+
 }
