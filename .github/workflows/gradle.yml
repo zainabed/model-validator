@@ -31,9 +31,8 @@ jobs:
       uses: Madrapps/jacoco-report@v1.1
       with:
         # Path of the generated xml file
-        path: build/reports/jacoco/test/jacocoTestReport.xml
-        # Github personal token to add commits to Pull Request
-        token: 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
+        path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
         # The minimum code coverage that is required to pass for overall project
         min-coverage-overall: 80
         # The minimum code coverage that is required to pass for changed files
