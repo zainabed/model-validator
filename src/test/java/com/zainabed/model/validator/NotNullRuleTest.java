@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidationRulesTest {
+class NotNullRuleTest {
 
     private Supplier<String> nullSupplier;
     private Supplier<String> nonNullSupplier;
