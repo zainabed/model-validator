@@ -48,6 +48,10 @@ class MinValueRuleTest {
             minValue(validSupplier, 0, errorMessage);
         });
         assertEquals(ValidationRules.INVALID_MIN_VALUE_ERROR, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowExceptionForMinValueLessThanZero() {
         assertThrows(IllegalArgumentException.class, () -> {
             minValue(validSupplier, -1, errorMessage);
         });

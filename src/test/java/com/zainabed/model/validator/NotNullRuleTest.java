@@ -31,16 +31,18 @@ class NotNullRuleTest {
 
     @Test
     void shouldAssertForNullSupplier() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             ValidationRules.notNull(null, message);
         });
+        assertEquals(exception.getMessage(), ValidationRules.EMPTY_GETTER_METHOD_ERROR);
     }
 
     @Test
     void shouldAssertForNullMessage() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             ValidationRules.notNull(nonNullSupplier, null);
         });
+        assertEquals(exception.getMessage(), ValidationRules.ERROR_MESSAGE_NULL_ERROR);
     }
 
     @Test
@@ -54,6 +56,5 @@ class NotNullRuleTest {
         Supplier<Integer> integerCallable = () -> 1;
         assertNull(ValidationRules.notNull(integerCallable, message));
     }
-
 
 }
