@@ -2,6 +2,7 @@ package com.zainabed.model.util;
 
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public interface Conditions {
     static Consumer<String> ILLEGAL_ARGUMENT_EXCEPTION_CONSUMER =
@@ -15,6 +16,7 @@ public interface Conditions {
                 consumer.accept(input);
             }
         };
+
     }
 
     static ExceptionConsumer<Consumer<String>, String> ifLessThanEqualTo(Integer a, Integer b) {
@@ -23,4 +25,6 @@ public interface Conditions {
                 consumer.accept(input);
         };
     }
+
+
 }
