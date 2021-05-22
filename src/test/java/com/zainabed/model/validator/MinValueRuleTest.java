@@ -24,7 +24,6 @@ class MinValueRuleTest {
         validSupplier = () -> 11;
         errorMessage = "Should not be less";
         minValue = 10;
-
     }
 
     @Test
@@ -35,25 +34,18 @@ class MinValueRuleTest {
     }
 
     @Test
-    void shouldThrowExceptionForEmptySupplier() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            minValue(null, minValue, errorMessage);
-        });
-        assertEquals(ValidationRules.EMPTY_GETTER_METHOD_ERROR, exception.getMessage());
+    void shouldReturnErrorForEmptySupplier() {
+        assertEquals(ValidationRules.SUPPLIER_IS_EMPTY, minValue(null, minValue, errorMessage));
+    }
+
+
+    @Test
+    void shouldReturnErrorForInvalidMinValue() {
+        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, 0, errorMessage));
     }
 
     @Test
-    void shouldThrowExceptionForInvalidMinValue() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            minValue(validSupplier, 0, errorMessage);
-        });
-        assertEquals(ValidationRules.INVALID_MIN_VALUE_ERROR, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionForMinValueLessThanZero() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            minValue(validSupplier, -1, errorMessage);
-        });
+    void shouldReturnErrorForMinValueLessThanZero() {
+        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, -1, errorMessage));
     }
 }

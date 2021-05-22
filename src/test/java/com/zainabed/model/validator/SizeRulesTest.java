@@ -42,27 +42,27 @@ class SizeRulesTest {
     void shouldReturnErrorMessageForEmptySupplier() {
         String validationMessage = ValidationRules.size(null, min, max, errorMessage);
         assertNotNull(validationMessage);
-        assertEquals(validationMessage, ValidationRules.SUPPLIER_IS_EMPTY_ERROR);
+        assertEquals(validationMessage, ValidationRules.SUPPLIER_IS_EMPTY);
     }
 
     @Test
     void shouldReturnErrorMessageForEmptyValueOfSupplier() {
         String validationMessage = ValidationRules.size(() -> null, min, max, errorMessage);
         assertNotNull(validationMessage);
-        assertEquals(validationMessage, ValidationRules.SUPPLIER_IS_EMPTY_ERROR);
+        assertEquals(validationMessage, ValidationRules.SUPPLIER_IS_EMPTY);
     }
 
     @Test
     void shouldReturnErrorMessageForEmptyInputErrorMessage() {
         String validationMessage = ValidationRules.size(stringSupplier, min, max, null);
         assertNotNull(validationMessage);
-        assertEquals(validationMessage, ValidationRules.ERROR_MESSAGE_NULL_ERROR);
+        assertEquals(validationMessage, ValidationRules.ERROR_MESSAGE_IS_EMPTY);
     }
 
     @Test
     void shouldReturnErrorMessageForInvalidMinMax() {
         String validationMessage = ValidationRules.size(stringSupplier, max, min, errorMessage);
         assertNotNull(validationMessage);
-        assertEquals(validationMessage, ValidationRules.MIN_MAX_ERROR);
+        assertEquals(validationMessage, ValidationRules.MIN_IS_GREATER_THAN_MAX);
     }
 }

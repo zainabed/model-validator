@@ -3,10 +3,10 @@ package com.zainabed.model.validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.security.InvalidParameterException;
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
+import static com.zainabed.model.validator.ValidationRules.SUPPLIER_IS_EMPTY;
+import static com.zainabed.model.validator.ValidationRules.notNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NotNullRuleTest {
@@ -25,36 +25,35 @@ class NotNullRuleTest {
     @Test
     void shouldValidateNotNull() {
 
-        assertNotNull(ValidationRules.notNull(nullSupplier, message));
-        assertNull(ValidationRules.notNull(nonNullSupplier, message));
+        assertNotNull(notNull(nullSupplier, message));
+        assertNull(notNull(nonNullSupplier, message));
     }
 
     @Test
-    void shouldAssertForNullSupplier() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            ValidationRules.notNull(null, message);
-        });
-        assertEquals(exception.getMessage(), ValidationRules.EMPTY_GETTER_METHOD_ERROR);
+    void shouldReturnErrorEmptySupplier() {
+        assertEquals(SUPPLIER_IS_EMPTY, notNull(null, message));
+    }
+
+    @Test
+    void shouldReturnErrorForNullSupplier() {
+        assertEquals(SUPPLIER_IS_EMPTY, notNull(nullSupplier,message));
     }
 
     @Test
     void shouldAssertForNullMessage() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            ValidationRules.notNull(nonNullSupplier, null);
-        });
-        assertEquals(exception.getMessage(), ValidationRules.ERROR_MESSAGE_NULL_ERROR);
+        assertEquals(ValidationRules.ERROR_MESSAGE_IS_EMPTY, notNull(nonNullSupplier, null));
     }
 
     @Test
     void shouldValidateBoolean() {
         Supplier<Boolean> booleanCallable = () -> true;
-        assertNull(ValidationRules.notNull(booleanCallable, message));
+        assertNull(notNull(booleanCallable, message));
     }
 
     @Test
     void shouldValidateInteger() {
         Supplier<Integer> integerCallable = () -> 1;
-        assertNull(ValidationRules.notNull(integerCallable, message));
+        assertNull(notNull(integerCallable, message));
     }
 
 }
