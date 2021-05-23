@@ -2,7 +2,6 @@ package com.zainabed.model.util;
 
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public interface Conditions {
     static Consumer<String> ILLEGAL_ARGUMENT_EXCEPTION_CONSUMER =

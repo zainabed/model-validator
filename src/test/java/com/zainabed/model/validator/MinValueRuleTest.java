@@ -28,24 +28,24 @@ class MinValueRuleTest {
 
     @Test
     void shouldValidateMinValueRule() {
-        assertNotNull(minValue(invalidSupplier, minValue, errorMessage));
-        assertNull(minValue(validSupplier, minValue, errorMessage));
-        assertNull(minValue(() -> minValue, minValue, errorMessage));
+        assertNotNull(minValue(invalidSupplier, minValue, errorMessage).get());
+        assertNull(minValue(validSupplier, minValue, errorMessage).get());
+        assertNull(minValue(() -> minValue, minValue, errorMessage).get());
     }
 
     @Test
     void shouldReturnErrorForEmptySupplier() {
-        assertEquals(ValidationRules.SUPPLIER_IS_EMPTY, minValue(null, minValue, errorMessage));
+        assertEquals(ValidationRules.SUPPLIER_IS_EMPTY, minValue(null, minValue, errorMessage).get());
     }
 
 
     @Test
     void shouldReturnErrorForInvalidMinValue() {
-        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, 0, errorMessage));
+        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, 0, errorMessage).get());
     }
 
     @Test
     void shouldReturnErrorForMinValueLessThanZero() {
-        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, -1, errorMessage));
+        assertEquals(ValidationRules.MIN_VALUE_IS_LESS_THAN_ZERO, minValue(validSupplier, -1, errorMessage).get());
     }
 }

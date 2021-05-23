@@ -25,35 +25,35 @@ class NotNullRuleTest {
     @Test
     void shouldValidateNotNull() {
 
-        assertNotNull(notNull(nullSupplier, message));
-        assertNull(notNull(nonNullSupplier, message));
+        assertNotNull(notNull(nullSupplier, message).get());
+        assertNull(notNull(nonNullSupplier, message).get());
     }
 
     @Test
     void shouldReturnErrorEmptySupplier() {
-        assertEquals(SUPPLIER_IS_EMPTY, notNull(null, message));
+        assertEquals(SUPPLIER_IS_EMPTY, notNull(null, message).get());
     }
 
     @Test
     void shouldReturnErrorForNullSupplier() {
-        assertEquals(SUPPLIER_IS_EMPTY, notNull(nullSupplier,message));
+        assertEquals(message, notNull(nullSupplier,message).get());
     }
 
     @Test
     void shouldAssertForNullMessage() {
-        assertEquals(ValidationRules.ERROR_MESSAGE_IS_EMPTY, notNull(nonNullSupplier, null));
+        assertEquals(ValidationRules.ERROR_MESSAGE_IS_EMPTY, notNull(nonNullSupplier, null).get());
     }
 
     @Test
     void shouldValidateBoolean() {
         Supplier<Boolean> booleanCallable = () -> true;
-        assertNull(notNull(booleanCallable, message));
+        assertNull(notNull(booleanCallable, message).get());
     }
 
     @Test
     void shouldValidateInteger() {
         Supplier<Integer> integerCallable = () -> 1;
-        assertNull(notNull(integerCallable, message));
+        assertNull(notNull(integerCallable, message).get());
     }
 
 }
